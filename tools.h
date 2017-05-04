@@ -24,7 +24,11 @@ public:
   */
   Eigen::MatrixXd CalculateJacobian(const Eigen::VectorXd& x_state);
 
+  double checkPIValue(double x);
 
+  Eigen::VectorXd CalculateHofX(const Eigen::VectorXd& x_state);
+
+    void checkPIValue(double *x);
 };
 
 #endif /* TOOLS_H_ */

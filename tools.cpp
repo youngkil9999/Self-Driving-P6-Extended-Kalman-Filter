@@ -64,6 +64,10 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
     float vx = x_state(2);
     float vy = x_state(3);
 
+    if (px < 0.001) {
+        px = 0.001;
+    };
+
     //pre-compute a set of terms to avoid repeated calculation
     float c1 = px*px+py*py;
     float c2 = sqrt(c1);
@@ -80,6 +84,60 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
             -(py/c1), (px/c1), 0, 0,
             py*(vx*py - vy*px)/c3, px*(px*vy - py*vx)/c3, px/c2, py/c2;
 
+//    std::cout << "c1 c2 c3 " << c2 << " " << c1 << " " << c3 << std::endl;
+//    std::cout << "px py vx vy " << px << " " << py << " " << vx << " " << vy << std::endl;
+
     return Hj;
 
+}
+
+VectorXd Tools::CalculateHofX(const VectorXd& x_state) {
+
+    VectorXd h(3);
+    //recover state parameters
+    float px = x_state(0);
+    float py = x_state(1);
+    float vx = x_state(2);
+    float vy = x_state(3);
+
+    //check division by zero
+
+    if (px == 0) {
+        //cout << "px is close to zero" << endl;
+        px = 0.1;
+    }
+
+    if (py == 0) {
+        //cout << "py is close to zero" << endl;
+        py = 0.1;
+    }
+
+
+//compute the Jacobian matrix
+    float px2 = px * px;
+    float py2 = py * py;
+    float rho = sqrt(px2 + py2);
+    float mult = (px * vx) + (py * vy);
+    float phi = atan2(py, px);
+    float roh_dot = mult / rho;
+
+    if (px2 <= 0.001) {
+        //cout << "px2 is close to zero" <<endl;
+        px2 = 0.001;
+    }
+
+    if (py2 <= 0.001) {
+        //cout << "py2 is close to zero" << endl;
+        py2 = 0.001;
+    }
+
+    if (rho <= 0.0001) {
+        //cout << "sqrt of px2 and py2 is close to zero" << endl;
+        rho = 0.0001;
+
+    }
+
+    h << rho, phi, roh_dot;
+
+    return h;
 }
