@@ -17,17 +17,17 @@ void check_arguments(int argc, char* argv[]) {
   string usage_instructions = "Usage instructions: ";
   usage_instructions += argv[0];
   usage_instructions += " path/to/input.txt output.txt";
-
-//  string path;
-//  path = "/Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data";
-//  usage_instructions += " " + path + "/sample-laser-radar-measurement-data-1.txt " + path + "/output.txt";
-
+///*
+  string path;
+  path = "/Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data";
+  usage_instructions += " " + path + "/sample-laser-radar-measurement-data-1.txt " + path + "/output.txt";
+//*/
   bool has_valid_args = false;
 
-/* Manual practice
+///* Manual practice
   has_valid_args = true;
   argc = 3;
-*/
+//*/
 
   // make sure the user has provided input and output files
   if (argc == 1) {
@@ -62,27 +62,26 @@ int main(int argc, char* argv[]) {
 
 
   check_arguments(argc, argv);
-
-/* manual practice
+///* manual practice
   string path = "/Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data";
   string ip = path + "/sample-laser-radar-measurement-data-1.txt";
   string op = path + "/output.txt";
-*/
+//*/
 
 
-  string in_file_name_ = argv[1];
-//  string in_file_name_ = ip;
+//  string in_file_name_ = argv[1];
+    string in_file_name_ = ip;
   ifstream in_file_(in_file_name_.c_str(), ifstream::in);
 
-  string out_file_name_ = argv[2];
-//  string out_file_name_ = op;
+//  string out_file_name_ = argv[2];
+    string out_file_name_ = op;
   ofstream out_file_(out_file_name_.c_str(), ofstream::out);
 
   check_files(in_file_, in_file_name_, out_file_, out_file_name_);
 
-//  measurement pack of list
+  //  measurement pack of list
   vector<MeasurementPackage> measurement_pack_list;
-//  Original points of list
+  //  Original points of list
   vector<GroundTruthPackage> gt_pack_list;
 
   string line;
@@ -159,8 +158,10 @@ int main(int argc, char* argv[]) {
   //Call the EKF-based fusion
   size_t N = measurement_pack_list.size();
   for (size_t k = 0; k < N; ++k) {
+
     // start filtering from the second frame (the speed is unknown in the first
     // frame)
+
     fusionEKF.ProcessMeasurement(measurement_pack_list[k]);
 
     // output the estimation
