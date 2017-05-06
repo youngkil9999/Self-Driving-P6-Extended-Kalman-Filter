@@ -26,7 +26,7 @@ public:
 
   double checkPIValue(double x);
 
-  Eigen::VectorXd CalculateHofX(const Eigen::VectorXd& x_state);
+  Eigen::VectorXd CalculateHX(const Eigen::VectorXd& x_state);
 
     void checkPIValue(double *x);
 };

@@ -1049,6 +1049,8 @@ Eigen/Dense
 /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/src/kalman_filter.cpp
 kalman_filter.h
 /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/src/kalman_filter.h
+tools.h
+/Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/src/tools.h
 
 /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/src/kalman_filter.h
 Eigen/Dense
