@@ -1,8 +1,12 @@
 #include "kalman_filter.h"
 #include "tools.h"
+#include <iostream>
 
+
+using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
+using std::vector;
 
 
 
@@ -46,7 +50,7 @@ void KalmanFilter::Update(const VectorXd &z) {
   MatrixXd K =  P_ * Ht * Si;
 
   //new state
-
+  cout << "what is y value " << y << endl;
   x_ = x_ + (K * y);
 
   long x_size = x_.size();
@@ -65,12 +69,19 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   */
     Tools tools;
 
+    //cartesian to polar
+    VectorXd h_ = tools.CalculateHX(x_);
 
-    VectorXd h = tools.CalculateHofX(x_);
+    VectorXd y = z - h_;
 
-    VectorXd y = z - h;
 
-//    y[1] = tools.checkPIValue(y[1]);
+    if (y(1)>M_PI){
+        y(1) -= 2*M_PI;
+    }
+    if (y(1)<-M_PI){
+        y(1) += 2*M_PI;
+    }
+
 
     MatrixXd H_ = tools.CalculateJacobian(x_);
 
@@ -80,6 +91,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     MatrixXd K =  P_ * Ht * Si;
 
     //new state
+    cout << "what is y value " << y << endl;
+    cout << "what is K value " << K << endl;
+    cout << "what is S value " << S << endl;
+    cout << "what is H_ value " << H_ << endl;
+    cout << "what is P_ value " << P_ << endl;
+
 
     x_ = x_ + (K * y);
 
@@ -88,5 +105,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     MatrixXd I;
     I = MatrixXd::Identity(x_size, x_size);
     P_ = (I - K * H_) * P_;
+
+
 
 }
