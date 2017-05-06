@@ -1,5 +1,5 @@
 # Extended Kalman Filter Project Starter Code
-Self-Driving Car Engineer Nanodegree Program
+Self-Driving Car Engineer Nanodegree Program_JAY
 
 ---
 
@@ -20,24 +20,28 @@ Self-Driving Car Engineer Nanodegree Program
 
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
-3. Compile: 'cd /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6'
+3. Compile: 'cd /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/src'
    then, `cmake .. && make`
-   * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
-4. Run it: `./ExtendedKF path/to/input.txt path/to/output.txt`. You can find
-   some sample inputs in 'data/'.
-    - eg. `/Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/src /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/sample-laser-radar-measurement-data-1.txt /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/output-1.txt`
+   <!-- * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make` -->
+4. Run it: `./src /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/sample-laser-radar-measurement-data-1.txt /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/output.txt`.
+## Achieved RSME:
+Accuracy - RMSE:
+0.0651649
+0.0605378
+  0.54319
+ 0.544191
 
 
 5. Test with a simulator
    * /Users/Jay/anaconda/envs/yourNewEnvironment/bin/python /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/kalman-tracker.py /Users/JAY/Desktop/Udacity/Self_Driving_Car/CarND-Extended-Kalman-Filter-P6/data/src
 
 6. Run simulator
-7. Save data directory (where the output data saved, /Users/Jay/Desktop/Udacity/Self_driving_Car/CarND-Extended-Kalman-Filter/src/)
+7. Save record data in the directory below (where the input data saved, /Users/Jay/Desktop/Udacity/Self_driving_Car/CarND-Extended-Kalman-Filter/src/)
 
 8. Simulator press run. then, Kalman filter tracking dot will be appeared on the simulator
 
 9. Modify C++ code if kalman filter is not correctly tracking.
-Trial 1. Changed P_ values smaller and bigger
-: didn't work well. when the value smaller, it might look better but not sure it is the way it should work
 
-Trial 2. Contrain parameter ()
+# Main point
+- Angle normalisation ( -M_PI <= phi range <= M_PI )
+- Prevent division by zero
